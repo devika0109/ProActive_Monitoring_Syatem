@@ -1,65 +1,25 @@
-
 .example-container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
-
+  margin: 20px;
 }
 
-.mat-table {
-  overflow: auto;
-  min-width: 300px;
-  max-height: 500px;
-  display: flex;
-  flex-direction: column;
-  max-height: 100%;
-  width: 85%;
-  margin: 0 auto;
-  margin-top: 30px;
-
-  border: 0.8px solid black;
-
-
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
 }
 
-.mat-header-row{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: large;
-
-
-  background-color: #1273bc;
-  min-height: 20px;
-  color: white;
-
-
-  padding-left: 20px;
-}
-.mat-header-cell{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: large;
-  color: white;
-  padding: 20px;
-  text-align: left;
-
-}
-.mat-cell{
-  padding: 20px;
-  text-align: left;
-}
-.example-container1 {
-  display: flex;
-  flex-direction: column;
-  max-height: 100%;
-  width: 95%;
-  margin: 0 auto;
-  margin-top: 10px;
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
 }
 
-.dmat_header_row{
-  background-color: #1273bc;
-  min-height: 42px;
-  color: white;
+.mat-elevation-z8 {
+  -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.1), 0 1px 7px 0px rgba(0,0,0,.14), 0 0px 2px 0px rgba(0,0,0,.12);
 }
+
 .header-txt{
   color:#0076ce;
   /* margin-left: 200px; */
@@ -67,50 +27,9 @@
   margin-left: 475px;
   font-size: x-large;
   font-family: 'Times New Roman', Times, serif;
-
-}
-.example-icon {
-  padding: 0 14px;
 }
 
-.example-spacer {
-  flex: 1 1 auto;
-
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
 }
-.mat-toolbar-row{
-  background-color: #1273bc;
-  color: white;
-  font-family: 'Times New Roman', Times, serif;
-  height: 60px;
-
-}
-._input{
-  width: 300px;
-  height: 25px;
-  padding-left: 5px;
-  margin-left: 5px;
-}
-.mat-icon{
-  top: 20px;
-  cursor: pointer;
-}
-._status th{
-  font-family: 'Times New Roman', Times, serif;
-  text-align: left;
-  background-color: #1273bc;
-
-
-  color:white;
-
-}
-._status th,td{
-  border: 1px solid black;
-  padding: 10px;
-}
-._status{
-  border: 1px solid black;
-  margin: auto;
-  border-collapse: collapse;
-  height: 100px;
-}
-
