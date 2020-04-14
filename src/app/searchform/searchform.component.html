@@ -1,0 +1,129 @@
+<div>
+  <div class="maindiv">
+
+    <div *ngIf='!showform' class="container sample-example-container">
+
+      <div style="margin: 30px auto;">
+        <h3 class="left_header">Invoice Event Search</h3>
+        <button mat-button class="basic_button sample_btn_search"style="margin-left:45px;" (click)="showformfiv()">Search</button>
+
+        <!-- <span class="sample_link" routerLink='ProcessInvoice'>ProcessInvoice</span> -->
+      </div>
+
+    </div>
+
+    <div *ngIf='showform' class="container example-container commonshadow">
+
+      <div class="header-txt"><h3 >{{name}}</h3></div>
+
+      <div class="formfiv">
+        <mat-form-field class="tooltiphover">
+          <input matInput maxlength="15"  placeholder="Invoice Number" [(ngModel)]="obj.InvoiceNumber">
+          <span *ngIf="!obj.InvoiceNumber && !obj.CustomerNumber && (!obj.FromDate || !obj.ToDate)"  class="tooltiptext">
+            !
+          </span>
+        </mat-form-field>
+
+        <mat-form-field class="tooltiphover">
+          <input matInput maxlength="15" placeholder="Customer Number" [(ngModel)]="obj.CustomerNumber">
+          <span *ngIf="!obj.InvoiceNumber && !obj.CustomerNumber && (!obj.FromDate || !obj.ToDate)" class="tooltiptext">
+            !
+          </span>
+        </mat-form-field>
+
+        <div class="form-date-row tooltiphover" >
+          <mat-form-field class="date_row">
+            <input matInput [matDatepicker]="picker" placeholder="From date" [(ngModel)]="obj.FromDate" (click)='picker.open()'>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="date_row" style="margin-left:20px" >
+              <input matInput [matDatepicker]="picker1" [min]="obj.FromDate" placeholder="To date" [(ngModel)]="obj.ToDate" (click)='picker1.open()'>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <span *ngIf="!obj.InvoiceNumber && !obj.CustomerNumber && (!obj.FromDate || !obj.ToDate)" class="tooltiptext"
+              style="margin-left:26px">!</span>
+          </mat-form-field>
+        </div>
+
+        <div class="align_center" >
+          <button title="Please Fill all the mandatory fields" [disableRipple]="true" mat-button type="submit"
+            [disabled]='(!obj.ToDate || !obj.FromDate) && !obj.CustomerNumber && !obj.InvoiceNumber'
+            class="basic_button btn_search" (click)="show()">
+            Search
+          </button>
+          <!-- <span class="link" routerLink='ProcessInvoice'>ProcessInvoice</span> -->
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- <div *ngIf='showchartspin'>
+      <div  class="lds-dual-ring">
+      </div>
+    </div> -->
+
+    <!-- <div *ngIf='showinfo'>
+      <mat-icon class="icon-info" title="No Results Found">info</mat-icon>
+    </div> -->
+
+    <div  style="display: flex;flex-direction: row;width: 69%;">
+      <div class="_chartset">
+        <canvas [ngStyle]="{'visibility': showchartspin ? 'hidden' : 'visible' }" style="height: 216px" id="homeChart"></canvas>
+      </div>
+      <div class="_sideChart">
+        <canvas [ngStyle]="{'visibility': !showrightGraph ? 'hidden' : 'visible' }" id="pieChart" style="height: 180px;"></canvas>
+        <canvas [ngStyle]="{'visibility': !showrightGraph ? 'hidden' : 'visible' }" id="lineChart" style="height: 180px;margin-top:30px"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf='showspinner' style="text-align: center;padding-top:20px">
+    <mat-progress-spinner style="margin: 0 auto;height: 30px"
+      mode="indeterminate">
+    </mat-progress-spinner>
+    <p>Loading Data...</p>
+  </div>
+
+  <div *ngIf='showlist' style="padding:18px 0px">
+
+    <div class="example-container1 mat-elevation-z8" *ngIf="!displaymessage">
+
+      <mat-table #table [dataSource]="dataSource" >
+
+        <ng-container matColumnDef="invoiceNum">
+          <mat-header-cell *matHeaderCellDef> Invoice Number </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="gotoDetails(element.invoiceNum)" class="invoice-cell">
+              {{element.invoiceNum}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="customerNum">
+          <mat-header-cell *matHeaderCellDef> Customer Number </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.customerNum}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="createDate">
+          <mat-header-cell *matHeaderCellDef> Create Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.createDate}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ociAckSentFlag">
+          <mat-header-cell *matHeaderCellDef> OCI Ack Sent </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ociAckSentFlag}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" class="dmat_header_row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>
+
+  </div>
+
+  <h3 style="text-align: center" *ngIf="displaymessage">No Results Found</h3>
+
+</div>
+
+

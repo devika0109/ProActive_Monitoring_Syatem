@@ -1,0 +1,59 @@
+._form{
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 300px;
+  margin-top: 64px;
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+  padding: 15px 25px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+/* .basic_button{
+  width: 99px;
+  align-self: center;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  margin-top: 9px;
+  margin-right: 20px;
+} */
+.basic_button{
+ background-color: #4CAF50;
+color: white;
+padding: 1px 2px;
+margin: 8px 0;
+border: none;
+cursor: pointer;
+width: 100%;
+}
+
+.btn_search{
+  background-color: #1273bc;
+  color:white;
+}
+
+.error{
+  color: red;
+  text-align: center;
+  margin-top:10px;
+  font-size: 12px;
+}
+.input{
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+box-sizing: border-box;
+}
+._input{
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}

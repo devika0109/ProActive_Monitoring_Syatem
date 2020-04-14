@@ -1,0 +1,49 @@
+.example_spacer{
+    text-align: center;
+    width: 83%;
+    padding: 10px;
+}
+
+.btn_back{
+    background-color: #1273bc;
+    color:white;
+    border-radius: 20px;
+    padding: 9px 12px 9px 12px;
+    width: 36px;
+    margin-top:0px
+}
+
+h4{
+    color: #1273bc;
+}
+
+.alignmedia{
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 1139px) {
+    .alignmedia {
+        display: flex;
+        flex-direction: column;
+    }
+    ._detailsrow{
+        width: 100% !important;
+    }
+}
+
+._detailsrow{
+    width: 34%;
+    display: inline-flex;
+    max-width: 100%;
+    margin-bottom: 5px;
+}
+
+.main-div{
+    width:94%;
+    margin:0 auto;
+}
+
+.commonspace{
+    margin: 10px 10px 10px 0px;
+}

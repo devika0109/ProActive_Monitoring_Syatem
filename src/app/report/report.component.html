@@ -1,0 +1,42 @@
+<mat-toolbar-row>
+  <span>
+    <input matInput  placeholder="Search Invoice Number"  class="_input"></span><mat-icon style="cursor: pointer;" (click)="searchinv()">search</mat-icon>
+  <span class="example-spacer"></span>
+  <mat-icon class="example-icon" [matMenuTriggerFor]="menu" >filter_list</mat-icon>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="incidentcreated()">Incident Created</button>
+    <button mat-menu-item (click)="reprocessed()">Reprocessed Invoices</button>
+    <button mat-menu-item (click)="missing()">Missing Invoices</button>
+
+  </mat-menu>
+</mat-toolbar-row>
+<div><h3 class="header-txt">{{name}}<span style="margin-left: 380px;cursor: pointer;" title="Refresh"><mat-icon *ngIf='showrefresh' >refresh</mat-icon></span> </h3></div>
+
+  <mat-table *ngIf='showlist' #table [dataSource]="dataSource">
+
+    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+      <mat-header-cell *cdkHeaderCellDef class="_matheadercell">{{ column.header }}</mat-header-cell>
+
+      <mat-cell *cdkCellDef="let row">{{ column.cell(row) }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; " ></mat-row>
+  </mat-table>
+  <table class="_status" *ngIf="searchbyinv" style="width:85%">
+    <tr>
+      <th>Invoice Number</th>
+      <th>Date</th>
+      <th>Time Of Creation</th>
+      <th>Incident Created</th>
+      <th>Reprocessed</th>
+    </tr>
+    <tr>
+      <td>10939384</td>
+      <td>10.04.98</td>
+      <td>1PM</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+
+  </table>
+

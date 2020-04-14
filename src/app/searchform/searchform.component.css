@@ -1,0 +1,200 @@
+.maindiv{
+  background:#1273bc;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  height: 415px;
+
+}
+
+.tooltiptext {
+  visibility: hidden;
+  color: red;
+  position: absolute;
+  z-index: 1;
+}
+
+.formfiv{
+  display: flex;
+  flex-direction: column;
+  padding: 0 45px;
+}
+
+.header-txt{
+  color: #1273bc;
+  padding-top: 10px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  text-align: center;
+  margin: 0px;
+}
+
+.align_center{
+  margin: 0 auto;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.example-container {
+  background: white;
+  border-radius: 3px;
+}
+
+.container{
+  margin: auto;
+  height: 349px;
+  margin-left: 10px;
+  margin-right: 12px;
+  width: 27%;
+}
+
+.commonshadow{
+  box-shadow: 0px 0px 16px 1.7px rgb(31, 91, 136);
+}
+
+.form-date-row{
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.left_header{
+  color: white;
+  font-size: x-large;
+  opacity: 0.7;
+  margin-top: 60px;
+}
+
+._chartAlign{
+  /* margin: 0 auto; */
+  margin-top: 8px;
+  margin-bottom: 20px;
+  /* padding: 16px 23px 16px 23px; */
+}
+
+._chartset{
+  width: 50%;
+  margin: auto;
+  margin-left: 0px;
+  margin-right: 12px;
+  -ms-flex-line-pack: distribute;
+  opacity: 0.8;
+  -webkit-animation: fadein 10s;
+  animation: fadein 10s;
+}
+
+._sideChart{
+  opacity: 0.8;
+  -webkit-animation: fadein 10s;
+  animation: fadein 10s;
+  width:50%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.commonmargin{
+  margin:0 38px;
+}
+
+.tooltiphover:hover .tooltiptext {
+  visibility: visible;
+}
+
+.date_row{
+  width: 47% !important;
+}
+
+.sample_btn_search{
+  background-color: #e6a445;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+.btn_search{
+  background-color: #1273bc;
+  color:white;
+  border-radius: 20px;
+}
+
+.sample_link{
+  cursor: pointer;
+  color: #fff;
+}
+
+.sample_link:hover{
+  text-decoration: underline;
+}
+
+.link{
+  cursor: pointer;
+  color: #1273bc;
+}
+
+.link:hover{
+  text-decoration: underline;
+}
+
+.example-container1 {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.dmat_header_row{
+  background-color: #1273bc;
+  min-height: 42px;
+  color: white;
+}
+
+::ng-deep .mat-header-cell{
+  color: aliceblue;
+  font-size: 14px;
+}
+
+.invoice-cell{
+  outline: none;
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.statdata{
+  width:94%;
+  margin: 0 auto;
+}
+
+.icon-info{
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  border-radius: 50%;
+  border: 4px solid;
+  border-color: wheat transparent;
+  animation: lds-dual-ring 2.45s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #1273bc;
+}

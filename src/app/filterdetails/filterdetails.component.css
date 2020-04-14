@@ -1,0 +1,36 @@
+.example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+}
+
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+  
+.dmat_header_row{
+    background-color: #1273bc;
+    min-height: 42px;
+    color: white;
+}
+
+
+
+::ng-deep .mat-header-cell{
+    color: aliceblue;
+    font-size: 14px;
+}
+
+.invoice-cell{
+    outline: none;
+    cursor: pointer;
+    text-decoration-line: underline;
+}

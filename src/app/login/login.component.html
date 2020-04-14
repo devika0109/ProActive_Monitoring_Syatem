@@ -1,0 +1,16 @@
+<div class="_form">
+  <label for="uname"><b>Username</b></label>
+    <input matInput  placeholder="UserName" [(ngModel)]="username" required class="_input">
+
+
+    <label for="psw"><b>Password</b></label>
+    <input matInput type="password" placeholder="Password" [(ngModel)]="password" required class="_input">
+
+
+  <button title="Please Fill all the mandatory fields" [disableRipple]="true" mat-button type="button"
+    [disabled]='!username || !password'
+    class="basic_button btn_search" (click)="login()">
+    Login
+  </button>
+  <span class="error" *ngIf="error">* {{error}}</span>
+</div>

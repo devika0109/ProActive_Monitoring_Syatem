@@ -1,0 +1,34 @@
+<div class="example-process-container">
+  <div class="form-header-txt"><h3>Procress Invoice</h3></div>
+
+  <div class="process-form">
+
+    <div class="process-form-fields">
+      <mat-form-field>
+        <input matInput maxlength="15"  placeholder="Invoice Number" >
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput maxlength="15" type="number" 
+        oninput="this.value=this.value.slice(0,this.maxLength)" placeholder="Account Number" >
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput type="number" placeholder="Amount" >
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput placeholder="Authorization Code" >
+      </mat-form-field>
+  
+      <div class="align_center">
+        <button title="Please Fill all the mandatory fields" [disableRipple]="true" mat-button type="submit" 
+          class="btn_search">
+          Process
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

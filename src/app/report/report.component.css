@@ -1,0 +1,116 @@
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+
+}
+
+.mat-table {
+  overflow: auto;
+  min-width: 300px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 30px;
+
+  border: 0.8px solid black;
+
+
+}
+
+.mat-header-row{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+
+
+  background-color: #1273bc;
+  min-height: 20px;
+  color: white;
+
+
+  padding-left: 20px;
+}
+.mat-header-cell{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+  color: white;
+  padding: 20px;
+  text-align: left;
+
+}
+.mat-cell{
+  padding: 20px;
+  text-align: left;
+}
+.example-container1 {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.dmat_header_row{
+  background-color: #1273bc;
+  min-height: 42px;
+  color: white;
+}
+.header-txt{
+  color:#0076ce;
+  /* margin-left: 200px; */
+  /* text-align: center; */
+  margin-left: 475px;
+  font-size: x-large;
+  font-family: 'Times New Roman', Times, serif;
+
+}
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+
+}
+.mat-toolbar-row{
+  background-color: #1273bc;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  height: 60px;
+
+}
+._input{
+  width: 300px;
+  height: 25px;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+.mat-icon{
+  top: 20px;
+  cursor: pointer;
+}
+._status th{
+  font-family: 'Times New Roman', Times, serif;
+  text-align: left;
+  background-color: #1273bc;
+
+
+  color:white;
+
+}
+._status th,td{
+  border: 1px solid black;
+  padding: 10px;
+}
+._status{
+  border: 1px solid black;
+  margin: auto;
+  border-collapse: collapse;
+  height: 100px;
+}
+

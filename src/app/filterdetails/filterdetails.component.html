@@ -1,0 +1,50 @@
+<section *ngIf="isSpinner" class="example-section">
+  <mat-progress-bar  mode="indeterminate">
+  </mat-progress-bar>
+</section>
+
+<section style="margin-top:10px">
+  <span (click)="ManagePreviousUrl()" style="margin-right: 0;padding: 10px;" class="basic_button">
+    Back
+  </span>
+</section>
+
+<div *ngIf='showMessage'>
+  <h3 style="text-align: center;">No Results Found</h3>
+</div>
+
+<div *ngIf="!isSpinner" class="example-container mat-elevation-z8" style="margin-bottom: 20px">
+  <mat-table #table [dataSource]="dataSource" >
+
+    <ng-container matColumnDef="invoiceNum">
+      <mat-header-cell *matHeaderCellDef> Invoice Number </mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="gotoDetails(element.invoiceNum)" class="invoice-cell">
+          {{element.invoiceNum}} 
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="customerNum">
+      <mat-header-cell *matHeaderCellDef> Customer Number </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.customerNum}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="createDate">
+      <mat-header-cell *matHeaderCellDef> Create Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.createDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ociAckSentFlag">
+      <mat-header-cell *matHeaderCellDef> OCI Ack Sent </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ociAckSentFlag}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="dmat_header_row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator #paginator
+            [pageSize]="10"
+            [length]="dataSource.length" 
+            [pageSizeOptions]="[5, 10, 20]"
+            [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

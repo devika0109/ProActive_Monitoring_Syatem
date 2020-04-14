@@ -1,0 +1,51 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened class="side-nav">
+    <mat-list >
+    <mat-list-item class="_li-nav" (click)="brams()" > BRAMSMQueue <div class="offline" style="margin-left:95px ;"></div></mat-list-item>
+    <mat-list-item class="_li-nav" (click)="dbc()"> DBCMQueue <div class="online" style="margin-left:118px ;"></div> </mat-list-item>
+    <mat-list-item class="_li-nav" (click)="dpam()"> DPAMQueue <div class="online" style="margin-left:120px ;"></div> </mat-list-item>
+    <mat-list-item class="_li-nav" (click)="fms()"> FMSMQueue <div class="online" style="margin-left:120px ;"></div> </mat-list-item>
+    <mat-list-item class="_li-nav" (click)="lease()"> LeaseMQueue <div class="online" style="margin-left:115px ;"></div> </mat-list-item>
+    <mat-list-item class="_li-nav" (click)="loan()"> LoanMQueue <div class="online" style="margin-left:120px ;"></div></mat-list-item>
+    <mat-list-item class="_li-nav" (click)="rams()"> RAMSMQueue <div class="online" style="margin-left:109px ;"></div></mat-list-item>
+    <!-- <mat-list-item class="_li-nav"> DFS_CFO_US_INV.DFS </mat-list-item> -->
+    <mat-list-item class="_li-nav" (click)="smbfraud()"> SMBFraudCaseMQ <div class="online" style="margin-left:82px ;"></div> </mat-list-item>
+    <mat-list-item class="_li-nav" (click)="rtpacase()"> RTPACaseMQ <div class="online" style="margin-left:115px ;"></div></mat-list-item>
+    <mat-list-item class="_li-nav" (click)="rtpasubmitservice()"> RTPAResubmitServiceMQ <div class="online" style="margin-left:38px ;"></div></mat-list-item>
+    <mat-list-item class="_li-nav" (click)="dfsresponse()"> DFSResponseOCIMQ <div class="online" style="margin-left:67px ;"></div> </mat-list-item>
+    <mat-list-item class="_li-nav" (click)="cancelorder()"> CancelOrderMQ <div class="online" style="margin-left:104px ;"></div> </mat-list-item>
+    <mat-list-item class="_li-nav" (click)="dfsrequest()"> DFSRequestOCIMQ <div class="online" style="margin-left:77px ;"></div></mat-list-item>
+   </mat-list></mat-drawer>
+  <mat-drawer-content >
+    <div class="header-txt"><h3 >{{name}}</h3></div>
+    <table id="t01">
+  <tr>
+    <th> Queue Depth:</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>In Proc:</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Out Proc:</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Last Put Time:</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Last Put Date:</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Last Get Time:</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Last Get Date:</th>
+    <td></td>
+  </tr>
+</table></mat-drawer-content>
+</mat-drawer-container>

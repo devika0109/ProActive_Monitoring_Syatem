@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+body{
+    margin: 0px;
+    font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.main-color{
+  color: #1273bc
+}
+
+.main-backgroundcolor{
+  color: #1273bc
+}
+
+.basic_button{
+  width: 99px;
+  align-self: center;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  margin-top: 9px;
+  margin-right: 20px;
+  background-color: #1273bc;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.main_header_text{
+  font-size: 17px;
+  color: #1273bc;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}

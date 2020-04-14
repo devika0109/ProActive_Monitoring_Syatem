@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="margin: 0px">
+  <mat-toolbar color="primary" style="background-color:#1273bc">
+    <mat-toolbar-row style="box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.1);">
+      <span routerLink='Search' style="outline: none;cursor: pointer">
+        <img  src="/assets/DFS_Lockup_Replica_White.png" style="margin-top: 8px;" width="150" height="55"/>
+      </span>
+     <!--  <span class="example_spacer">
+        <b  class="_headertxt">{{ title }}</b>
+      </span> -->
+      <span class="_topnav" *ngIf="checklogin() != 'Login'">
+        <button routerLink='Analysis'>Analysis</button>
+
+        <button routerLink='Report'>Report<span class="badge" *ngIf="badgeCount > 0">{{badgeCount}}</span></button>
+        <button routerLink='Queue'>Queue Status</button>
+      </span>
+      <span style="flex:1 1 auto"></span>
+      <!-- <span class="_logintxt">{{checklogin()}}</span> -->
+      <span class="_logintxt" *ngIf="checklogin() != 'Login'" (click)='logout()'>Logout</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+<router-outlet></router-outlet>

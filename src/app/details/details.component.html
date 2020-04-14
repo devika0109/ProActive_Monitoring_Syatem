@@ -1,0 +1,34 @@
+<div style="height: 40px;padding: 23px;display: flex;flex-direction: row;">
+  <span (click)="back()" class="basic_button btn_back">
+    Back
+  </span>
+  <span class="example_spacer">
+    <b  class="main_header_text">{{ title }}</b>
+  </span>
+</div>
+
+
+<div class="main-div" *ngIf="detailsObj!=null">
+
+  <div class="alignmedia">
+    <div class="_detailsrow"><span><b class='main-color'>Invoice Number &nbsp;: </b> &nbsp;{{detailsObj.invoiceNum}}</span></div>
+    <div class="_detailsrow"><span><b class="main-color">Customer Number &nbsp;: </b> &nbsp;{{detailsObj.customerNum}}</span></div>
+    <div class="_detailsrow"><span><b class="main-color">Created Date &nbsp;: </b> &nbsp;{{detailsObj.createDate}}</span></div>
+  </div>
+
+  <div class="commonspace">
+    <h4>SLayer Events</h4>
+    <app-commontable [displayedColumns]="sLayerEventcolumns" [dataSource]="detailsObj.sLayerEvents"></app-commontable>
+  </div>
+
+  <div class="commonspace">
+    <h4>Non-SLayer DFS Events</h4>
+    <app-commontable [displayedColumns]="nonsLayercolumns" [dataSource]="detailsObj.nonSLayerDFSEvents"></app-commontable>
+  </div>
+
+  <div class="commonspace">
+    <h4>OCI Aknowledgement</h4>
+    <app-commontable [displayedColumns]="ociAckscolumns" [dataSource]="detailsObj.ociAcks"></app-commontable>
+  </div>
+
+</div>

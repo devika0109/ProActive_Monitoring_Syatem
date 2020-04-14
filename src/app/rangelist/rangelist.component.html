@@ -1,0 +1,61 @@
+<div>
+  <div style="height: 40px;padding: 23px;display: flex;flex-direction: row;">
+    <span routerLink="/Search" class="basic_button btn_back">
+      Back
+    </span>
+    <span class="example_spacer">
+      <b  class="main_header_text">Invoice Event List</b>
+    </span>
+  </div>
+
+  <div *ngIf='showspinner' style="text-align: center;padding-top:20px">
+    <mat-progress-spinner style="margin: 0 auto;height: 15px"
+      mode="indeterminate">
+    </mat-progress-spinner>
+    <p>Loading Data...</p>
+  </div>
+
+  <div *ngIf="showChart" style="width: 700px; margin: 0 auto">
+    <canvas id="myChart" class="_chartAlign" (click)='pieChartClick($event)'></canvas>
+  </div>
+
+  <div *ngIf='showlist' >
+    
+    <div class="example-container1 mat-elevation-z8" style="margin-bottom: 20px">
+      <mat-table #table [dataSource]="dataSource" >
+  
+        <ng-container matColumnDef="invoiceNum">
+          <mat-header-cell *matHeaderCellDef> Invoice Number </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="gotoDetails(element.invoiceNum)" class="invoice-cell">
+              {{element.invoiceNum}} 
+          </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="customerNum">
+          <mat-header-cell *matHeaderCellDef> Customer Number </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.customerNum}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="createDate">
+          <mat-header-cell *matHeaderCellDef> Create Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.createDate}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="ociAckSentFlag">
+          <mat-header-cell *matHeaderCellDef> OCI Ack Sent </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ociAckSentFlag}} </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns" class="dmat_header_row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator #paginator
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 20]"
+                [showFirstLastButtons]="true">
+      </mat-paginator>
+    </div>
+  </div>
+
+  <h3 style="text-align: center" *ngIf="displaymessage">No Results Found</h3>
+</div>

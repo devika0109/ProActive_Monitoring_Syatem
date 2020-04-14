@@ -1,0 +1,42 @@
+.process-form{
+    display: flex;
+    margin: 0 auto;
+    width: 35%;
+    border-radius: 3px;
+    box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.1)
+}
+
+.process-form-fields{
+    flex-direction: column;
+    display: flex;
+    margin: 23px auto;
+    width: 72%;
+}
+  
+.form-header-txt{
+    color: #1273bc;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.align_center{
+    margin: 0 auto;
+}
+  
+.example-process-container {
+    padding-bottom: 28px;
+}
+
+.btn_search{
+    background-color: #1273bc;
+    color:white;
+    width: 99px;
+    align-self: center;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    margin-top: 9px;
+    margin-right: 20px;
+}
