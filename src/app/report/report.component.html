@@ -22,14 +22,21 @@
   <div class="example-header">
     <mat-toolbar style="background: none;">
       <mat-toolbar-row>
-        <mat-icon class="example-icon" [matMenuTriggerFor]="menu" >filter_list</mat-icon>
-        <mat-menu #menu="matMenu">
+        <mat-icon class="example-icon" >filter_list</mat-icon>
+        <mat-form-field style="width: 20%;margin:6px">
+          <mat-select placeholder="Incident Rasied" [formControl]="Inct_RaisedFilter" [(value)]="raisedValue">
+            <mat-option value="true">true</mat-option>
+            <mat-option value="false">false</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="filterColumn('Inc_Num')">Invoice Number</button>
           <button mat-menu-item (click)="filterColumn('Inc_Raised')">Incident Raised</button>
-        </mat-menu>
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by {{columnname}}">
+        </mat-menu> -->
+        <mat-form-field style="width: 20%;margin:6px">
+          <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)" placeholder="Filter by Invoice_Num">
         </mat-form-field>
+        <button (click)="resetFilters()" mat-raised-button>Reset</button>
       </mat-toolbar-row>
     </mat-toolbar>    
   </div>

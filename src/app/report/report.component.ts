@@ -1,22 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import{ ViewChild } from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { timer } from 'rxjs/_esm5/observable/timer';
+import { FormControl } from '@angular/forms';
 
-const ELEMENT_DATA: any[] = [
-  {Inc_Num: 108172632, Processdate: '10.04.98', Inc_Raised: false},
-  {Inc_Num: 227386271, Processdate: '10.04.98', Inc_Raised: true},
-  {Inc_Num: 373529188, Processdate: '10.04.98', Inc_Raised: false},
-  {Inc_Num: 492737288, Processdate: '10.04.98', Inc_Raised: true},
+const ELEMENT_DATA: Report[] = [
+  {Inc_Num: "108172632", Processdate: '10.04.98', Inc_Raised: "false"},
+  {Inc_Num: "227386271", Processdate: '10.04.98', Inc_Raised: "true"},
+  {Inc_Num: "373529188", Processdate: '10.04.98', Inc_Raised: "false"},
+  {Inc_Num: "492737288", Processdate: '10.04.98', Inc_Raised: "true"},
 ];
 
 export interface Report{
   Inc_Num : string;
   Processdate: string;
-  Inc_Raised : boolean;
+  Inc_Raised : string;
 }
 
 
@@ -32,69 +29,65 @@ export class ReportComponent implements OnInit {
   showrefresh:boolean=true;
   showlist:boolean=true;
   searchbyinv:boolean=false;
-  columnname: string;
+  columnname: string[]= [];
   displayedColumns = ['Invoice_Number', 'Processed_Date', 'Incident_Raised'];
   dataSource: MatTableDataSource<Report>;
+  raisedValue: string;
+  copydataSource: Report[];
+  Inct_RaisedFilter = new FormControl();
+  nameFilter = new FormControl();
+  filteredValues = {
+    Inc_Num: '', Processdate: '', Inc_Raised: ''
+  };
+  globalFilter: any;
 
   constructor() {
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
-    this.dataSource.filterPredicate = (d: Report, filter: string) => {
-      const textToSearch = d[this.columnname] && d[this.columnname].toString().toLowerCase() || '';
-      return textToSearch.toString().indexOf(filter) !== -1;
-    };
+    this.dataSource.filterPredicate = this.customFilterPredicate();
   }
 
   ngOnInit(): void {
-    
+    this.Inct_RaisedFilter.valueChanges.subscribe((positionFilterValue) => {
+      this.filteredValues['Inc_Raised'] = positionFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filter: string) {
+    this.globalFilter = filter;
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
   }
 
-  filterColumn(value: string){
-    this.columnname = value;
+  filterColumn(value: string, index: number){
+    this.columnname[index] = value;
   }
 
-  incidentcreated(): void{
-    this.name='Report of Invoices with Incident Created';
-    this.showrefresh=false;
-    this.showlist=true;
-    this.searchbyinv=false
-  }
-  
-  reprocessed():void{
-    this.name='Report of Reprocessed Invoices';
-    this.showrefresh=false;
-    this.showlist=true;
-    this.searchbyinv=false;
+  customFilterPredicate() {
+    const myFilterPredicate = (data: Report, filter: string): boolean => {
+      var globalMatch = !this.globalFilter;
+
+      if (this.globalFilter) {
+        // search all text fields
+        globalMatch = data.Inc_Num.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+      }
+
+      if (!globalMatch) {
+        return;
+      }
+
+      let searchString = JSON.parse(filter);
+      return data.Inc_Raised.toString().trim().indexOf(searchString.Inc_Raised) !== -1 &&
+        data.Inc_Num.toString().trim().toLowerCase().indexOf(searchString.Inc_Num.toLowerCase()) !== -1;
+    }
+    return myFilterPredicate;
   }
 
-  searchinv():void{
-    this.name='Invoice Status';
-    this.showlist=false;
-    this.searchbyinv=true;
-    this.showrefresh=false;
+  resetFilters()
+  {
+    this.globalFilter='';
+    this.raisedValue = '';
+    this.filteredValues['Inc_Raised'] = '';
+    this.filteredValues['Inc_Num'] = '';
+    this.dataSource.filter = '';
   }
-
-  missing():void{
-    this.name='Report of Missing Invoices';
-    this.showlist=true;
-    this.searchbyinv=false;
-    this.showrefresh=false;
-  }
-
 }
-
-
-
-
-
-export class ExampleDataSource extends DataSource<any> {
-
-  connect(): Observable<Element[]> {
-    return Observable.of(ELEMENT_DATA);
-  }
-
-  disconnect() {}
- }
