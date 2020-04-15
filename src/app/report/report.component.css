@@ -8,6 +8,7 @@
 .example-header {
   min-height: 64px;
   padding: 8px 24px 0;
+  display: flex;
 }
 
 .mat-form-field {
@@ -29,7 +30,22 @@
   font-family: 'Times New Roman', Times, serif;
 }
 
+.dmat_header_row{
+  background-color: #1273bc;
+  min-height: 42px;
+  color: white;
+}
+
+::ng-deep .mat-header-cell{
+  color: aliceblue;
+  font-size: 14px;
+}
+
 .mat-table {
   overflow: auto;
   max-height: 500px;
+}
+
+.example-icon {
+  padding: 0 14px;
 }

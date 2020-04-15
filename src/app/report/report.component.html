@@ -20,15 +20,18 @@
 <div class="example-container mat-elevation-z8">
 
   <div class="example-header">
-    <mat-icon class="example-icon" [matMenuTriggerFor]="menu" >filter_list</mat-icon>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="filterColumn('Inc_Num')">Invoice Number</button>
-      <button mat-menu-item (click)="filterColumn('Inc_Raised')">Incident Raised</button>
-    </mat-menu>
-
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+    <mat-toolbar style="background: none;">
+      <mat-toolbar-row>
+        <mat-icon class="example-icon" [matMenuTriggerFor]="menu" >filter_list</mat-icon>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="filterColumn('Inc_Num')">Invoice Number</button>
+          <button mat-menu-item (click)="filterColumn('Inc_Raised')">Incident Raised</button>
+        </mat-menu>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by {{columnname}}">
+        </mat-form-field>
+      </mat-toolbar-row>
+    </mat-toolbar>    
   </div>
 
   <mat-table #table [dataSource]="dataSource">
@@ -51,26 +54,7 @@
       <mat-cell *matCellDef="let element"> {{element.Inc_Raised}} </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="dmat_header_row"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
-
-  <!-- <table class="_status" *ngIf="searchbyinv" style="width:85%">
-    <tr>
-      <th>Invoice Number</th>
-      <th>Date</th>
-      <th>Time Of Creation</th>
-      <th>Incident Created</th>
-      <th>Reprocessed</th>
-    </tr>
-    <tr>
-      <td>10939384</td>
-      <td>10.04.98</td>
-      <td>1PM</td>
-      <td>True</td>
-      <td>False</td>
-    </tr>
-
-  </table> -->
-

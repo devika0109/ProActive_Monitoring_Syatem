@@ -14,7 +14,7 @@ import { Chart } from 'chart.js'
 })
 
 export class SearchformComponent implements OnInit {
-
+ 
   name: string = 'Invoice Events Search';
   private finalsearchType: string;
 
@@ -25,7 +25,6 @@ export class SearchformComponent implements OnInit {
   showdetails : boolean = false;
   showspinner: boolean = false;
   showchartspin: boolean = false;
-  showrightGraph: boolean = false;
 
   dataold: InvoiceEvent[];
   dataSource = new MatTableDataSource<InvoiceEvent>(this.dataold);
@@ -75,7 +74,6 @@ export class SearchformComponent implements OnInit {
               this.showchartspin = false;
               this.showinfo = false;
               this.LoadGraphdata(this.countObject);
-              this.showrightGraph = (this.countObject.nonAckCount>0 && this.countObject.ackCount>0);
               this.intializePieChartData(this.countObject);
               this.intializeLineChartData(this.countObject)
             });
@@ -93,11 +91,11 @@ export class SearchformComponent implements OnInit {
 
   show(): void{
     this.showlist = false;
-
+    
     if(this.obj.InvoiceNumber)
     {
       this.finalsearchType = this.obj.InvoiceNumber;
-      this.getInvoiceData(this.finalsearchType);
+      this.getInvoiceData(this.finalsearchType);     
     }
     else if(this.obj.CustomerNumber){
       this.finalsearchType = 'custnum/'+this.obj.CustomerNumber;
@@ -130,7 +128,7 @@ export class SearchformComponent implements OnInit {
     this.showspinner = true;
     this.searchser.getInvoice(newdata).subscribe(
       {
-        next: result => {
+        next: result => { 
           empty = result;
           if(empty!=null)
           {
@@ -185,7 +183,7 @@ export class SearchformComponent implements OnInit {
             barPercentage: 0.6,
             gridLines: {
               display: false,
-              color: "white"
+              color: "white"   
             },
             ticks: {
               fontColor: "white",
@@ -194,16 +192,13 @@ export class SearchformComponent implements OnInit {
           }],
           yAxes: [{
             barPercentage: 0.6,
-            angleLines:{
-              display: true
-            },
             gridLines: {
               display: false,
-              color: "white"
+              color: "white"      
             },
             ticks: {
               fontColor: "white",
-              fontSize: 14
+              fontSize: 14   
             }
           }]
         },
@@ -217,7 +212,7 @@ export class SearchformComponent implements OnInit {
               }
           }
         },
-        responsive: false,
+        responsive: true,
         display:true,
         title:{
           display: true,
@@ -253,7 +248,7 @@ export class SearchformComponent implements OnInit {
             fontColor: 'white'
           },
           generateLabels: {
-            strokeStyle: "white",
+            strokeStyle: "black",
           }
         },
         responsive: true,
@@ -267,7 +262,7 @@ export class SearchformComponent implements OnInit {
   }
 
   intializeLineChartData(valueObj: any): void{
-    this.canvas = document.getElementById('lineChart');
+    this.canvas = document.getElementById('pieChart2');
     this.ctx = this.canvas.getContext('2d');
     let myChart = new Chart(this.ctx, {
       type: 'pie',
@@ -289,7 +284,7 @@ export class SearchformComponent implements OnInit {
             fontColor: 'white'
           },
           generateLabels: {
-            strokeStyle: "white",
+            strokeStyle: "black",
           }
         },
         responsive: true,
@@ -301,4 +296,5 @@ export class SearchformComponent implements OnInit {
       }
     });
   }
+
 }

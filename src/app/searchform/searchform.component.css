@@ -4,7 +4,6 @@
   width: 100%;
   margin: 0 auto;
   height: 415px;
-
 }
 
 .tooltiptext {
@@ -63,7 +62,6 @@
   color: white;
   font-size: x-large;
   opacity: 0.7;
-  margin-top: 60px;
 }
 
 ._chartAlign{
