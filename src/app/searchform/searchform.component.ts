@@ -180,7 +180,6 @@ export class SearchformComponent implements OnInit {
       options: {
         scales: {
           xAxes: [{
-            barPercentage: 0.6,
             gridLines: {
               display: false,
               color: "white"   
@@ -191,7 +190,6 @@ export class SearchformComponent implements OnInit {
             }
           }],
           yAxes: [{
-            barPercentage: 0.6,
             gridLines: {
               display: false,
               color: "white"      
