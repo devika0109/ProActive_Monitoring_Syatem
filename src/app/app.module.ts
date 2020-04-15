@@ -32,6 +32,7 @@ import { FilterdetailsComponent } from './filterdetails/filterdetails.component'
 import { AnalysisComponent } from './analysis/analysis.component';
 import { QueueComponent } from './queue/queue.component';
 import { ReportComponent } from './report/report.component';
+import { ReportService } from './services/report.service';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { ReportComponent } from './report/report.component';
     CommonService,
     AuthService,
     AuthGuard,
-    CreateCookieService
+    CreateCookieService,
+    ReportService
   ],
   bootstrap: [AppComponent],
   entryComponents:[

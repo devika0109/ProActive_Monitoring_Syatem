@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import 'rxjs/add/observable/of';
 import { FormControl } from '@angular/forms';
+import { InvoiceDetails } from '../models/invoicedetails';
+import { ReportService } from '../services/report.service';
 
 const ELEMENT_DATA: Report[] = [
   {Inc_Num: "108172632", Processdate: '10.04.98', Inc_Raised: "false"},
@@ -30,25 +32,33 @@ export class ReportComponent implements OnInit {
   showlist:boolean=true;
   searchbyinv:boolean=false;
   columnname: string[]= [];
-  displayedColumns = ['Invoice_Number', 'Processed_Date', 'Incident_Raised'];
-  dataSource: MatTableDataSource<Report>;
+  displayedColumns = ['invoiceNum', 'createdDate', 'incidentRaised'];
+  private dataold: InvoiceDetails[];
+  dataSource = new MatTableDataSource<InvoiceDetails>(this.dataold);
   raisedValue: string;
-  copydataSource: Report[];
   Inct_RaisedFilter = new FormControl();
   nameFilter = new FormControl();
   filteredValues = {
-    Inc_Num: '', Processdate: '', Inc_Raised: ''
+    invoiceNum: '',  incidentRaised: ''
   };
   globalFilter: any;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
-    this.dataSource.filterPredicate = this.customFilterPredicate();
+  constructor(private reportService:ReportService) {
+    this.reportService.getInvoiceDetails()
+    .subscribe(results => {
+      
+      this.dataSource = new MatTableDataSource<InvoiceDetails>(results);
+      console.log(this.dataSource.data);
+    });
+    if(this.dataSource.data.length>0)
+    {
+      this.dataSource.filterPredicate = this.customFilterPredicate();
+    }
   }
 
   ngOnInit(): void {
     this.Inct_RaisedFilter.valueChanges.subscribe((positionFilterValue) => {
-      this.filteredValues['Inc_Raised'] = positionFilterValue;
+      this.filteredValues['incidentRaised'] = positionFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
   }
@@ -63,12 +73,12 @@ export class ReportComponent implements OnInit {
   }
 
   customFilterPredicate() {
-    const myFilterPredicate = (data: Report, filter: string): boolean => {
+    const myFilterPredicate = (data: InvoiceDetails, filter: string): boolean => {
       var globalMatch = !this.globalFilter;
 
       if (this.globalFilter) {
         // search all text fields
-        globalMatch = data.Inc_Num.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+        globalMatch = data.invoiceNum.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
       }
 
       if (!globalMatch) {
@@ -76,8 +86,8 @@ export class ReportComponent implements OnInit {
       }
 
       let searchString = JSON.parse(filter);
-      return data.Inc_Raised.toString().trim().indexOf(searchString.Inc_Raised) !== -1 &&
-        data.Inc_Num.toString().trim().toLowerCase().indexOf(searchString.Inc_Num.toLowerCase()) !== -1;
+      return data.incidentRaised.toString().trim().indexOf(searchString.incidentRaised) !== -1 &&
+        data.invoiceNum.toString().trim().toLowerCase().indexOf(searchString.invoiceNum.toLowerCase()) !== -1;
     }
     return myFilterPredicate;
   }

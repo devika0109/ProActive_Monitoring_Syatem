@@ -44,21 +44,21 @@
   <mat-table #table [dataSource]="dataSource">
 
     <!-- Position Column -->
-    <ng-container matColumnDef="Invoice_Number">
+    <ng-container matColumnDef="invoiceNum">
       <mat-header-cell *matHeaderCellDef> Invoice Number </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.Inc_Num}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.invoiceNum}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="Processed_Date">
+    <ng-container matColumnDef="createdDate">
       <mat-header-cell *matHeaderCellDef> ProcessedDate </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.Processdate}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.createdDate}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="Incident_Raised">
+    <ng-container matColumnDef="incidentRaised">
       <mat-header-cell *matHeaderCellDef> Incident Raised </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.Inc_Raised}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.incidentRaised}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns" class="dmat_header_row"></mat-header-row>
