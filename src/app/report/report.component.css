@@ -5,6 +5,16 @@
   margin: 11px;
 }
 
+.example-button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mat-tableheight{
+  height: 299px;
+}
+
 .example-header {
   min-height: 64px;
   display: flex;

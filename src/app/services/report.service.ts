@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/Rx";
@@ -18,8 +19,8 @@ export class ReportService {
     httpOptions.headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
    }
   log(msg: any) { console.log(msg); }
-   
-  private getInvoices ='https://invoice-processing-api-relaxed-roan-zc.ausvdc02.pcf.dell.com/api/v1/invoice/check/all';
+  
+  private getInvoices = environment.reportInvoiceUrl;
   
   getInvoiceDetails ():Observable<InvoiceDetails[]> {
     return this.http.get<InvoiceDetails[]>(this.getInvoices)

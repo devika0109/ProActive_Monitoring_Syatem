@@ -1,3 +1,4 @@
+import { ExcelService } from './../services/excel.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
 import { FormControl } from '@angular/forms';
@@ -36,7 +37,7 @@ export class ReportComponent implements OnInit {
   globalFilter: any;
 
   // constuctor
-  constructor(private reportService:ReportService) {
+  constructor(private reportService:ReportService, private excelService: ExcelService) {
     this.source.subscribe(() => {
       this.loadData();
     });
@@ -114,4 +115,7 @@ export class ReportComponent implements OnInit {
     this.dataSource.filter = '';
   }
 
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.dataSource.filteredData, 'ReportInvoice');
+  }
 }

@@ -33,6 +33,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { QueueComponent } from './queue/queue.component';
 import { ReportComponent } from './report/report.component';
 import { ReportService } from './services/report.service';
+import { ExcelService } from './services/excel.service';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { ReportService } from './services/report.service';
     AuthService,
     AuthGuard,
     CreateCookieService,
-    ReportService
+    ReportService,
+    ExcelService
   ],
   bootstrap: [AppComponent],
   entryComponents:[
