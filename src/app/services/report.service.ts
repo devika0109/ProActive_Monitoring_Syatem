@@ -19,13 +19,13 @@ export class ReportService {
    }
   log(msg: any) { console.log(msg); }
    
-  private getInvoices ='https://invoice-processing-api-reduced-excellent-gnu-of.ausvdc02.pcf.dell.com/api/v1/invoice/check/all';
+  private getInvoices ='https://invoice-processing-api-relaxed-roan-zc.ausvdc02.pcf.dell.com/api/v1/invoice/check/all';
   
   getInvoiceDetails ():Observable<InvoiceDetails[]> {
     return this.http.get<InvoiceDetails[]>(this.getInvoices)
       .pipe(  
         tap(data =>{
-          console.log(JSON.stringify(data));
+          //console.log(JSON.stringify(data));
         }),
         catchError(this.handleError('getInvoiceDetails', []))
       );

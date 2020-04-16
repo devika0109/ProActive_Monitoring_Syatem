@@ -1,22 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
-import 'rxjs/add/observable/of';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { InvoiceDetails } from '../models/invoicedetails';
 import { ReportService } from '../services/report.service';
-
-const ELEMENT_DATA: Report[] = [
-  {Inc_Num: "108172632", Processdate: '10.04.98', Inc_Raised: "false"},
-  {Inc_Num: "227386271", Processdate: '10.04.98', Inc_Raised: "true"},
-  {Inc_Num: "373529188", Processdate: '10.04.98', Inc_Raised: "false"},
-  {Inc_Num: "492737288", Processdate: '10.04.98', Inc_Raised: "true"},
-];
-
-export interface Report{
-  Inc_Num : string;
-  Processdate: string;
-  Inc_Raised : string;
-}
+import { interval } from 'rxjs/observable/interval';
 
 
 @Component({
@@ -25,51 +12,58 @@ export interface Report{
   styleUrls: ['./report.component.css']
 })
 
+
 export class ReportComponent implements OnInit {
 
   name:string='Report of Missing Invoices';
-  showrefresh:boolean=true;
-  showlist:boolean=true;
-  searchbyinv:boolean=false;
-  columnname: string[]= [];
-  displayedColumns = ['invoiceNum', 'createdDate', 'incidentRaised'];
+  showProgressbar:boolean = false;
+  private source = interval(60000);
+  raisedValue: string;
+  reprocessedValue: string;
+
+  // MatTable Columns to be displayed
+  displayedColumns = ['invoiceNum', 'createdDate', 'incidentRaised', 'invoiceReprocessed'];
+
+  // Filtering , Paginator and Sroting Variables for MatTable
   private dataold: InvoiceDetails[];
   dataSource = new MatTableDataSource<InvoiceDetails>(this.dataold);
-  raisedValue: string;
   Inct_RaisedFilter = new FormControl();
-  nameFilter = new FormControl();
+  Inct_ReprocessedFilter = new FormControl();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   filteredValues = {
-    invoiceNum: '',  incidentRaised: ''
+    invoiceNum: '',  incidentRaised: '', invoiceReprocessed: ''
   };
   globalFilter: any;
 
+  // constuctor
   constructor(private reportService:ReportService) {
-    this.reportService.getInvoiceDetails()
-    .subscribe(results => {
-      
-      this.dataSource = new MatTableDataSource<InvoiceDetails>(results);
-      console.log(this.dataSource.data);
+    this.source.subscribe(() => {
+      this.loadData();
+      console.log("Reloaded");
     });
-    if(this.dataSource.data.length>0)
-    {
-      this.dataSource.filterPredicate = this.customFilterPredicate();
-    }
+  }
+
+  ngAfterViewInit() {
+    this.loadData();
   }
 
   ngOnInit(): void {
+    this.showProgressbar = true;
     this.Inct_RaisedFilter.valueChanges.subscribe((positionFilterValue) => {
       this.filteredValues['incidentRaised'] = positionFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
+    this.Inct_ReprocessedFilter.valueChanges.subscribe((positionFilterValue) => {
+      this.filteredValues['invoiceReprocessed'] = positionFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
   }
 
+  // Filter Funation
   applyFilter(filter: string) {
     this.globalFilter = filter;
     this.dataSource.filter = JSON.stringify(this.filteredValues);
-  }
-
-  filterColumn(value: string, index: number){
-    this.columnname[index] = value;
   }
 
   customFilterPredicate() {
@@ -78,7 +72,7 @@ export class ReportComponent implements OnInit {
 
       if (this.globalFilter) {
         // search all text fields
-        globalMatch = data.invoiceNum.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+        globalMatch = data.invoiceNum.toString().trim().toLowerCase().startsWith(this.globalFilter.toLowerCase(),0);
       }
 
       if (!globalMatch) {
@@ -87,7 +81,8 @@ export class ReportComponent implements OnInit {
 
       let searchString = JSON.parse(filter);
       return data.incidentRaised.toString().trim().indexOf(searchString.incidentRaised) !== -1 &&
-        data.invoiceNum.toString().trim().toLowerCase().indexOf(searchString.invoiceNum.toLowerCase()) !== -1;
+        data.invoiceNum.toString().trim().toLowerCase().indexOf(searchString.invoiceNum.toLowerCase()) !== -1 &&
+        data.invoiceReprocessed.toString().trim().toLowerCase().indexOf(searchString.invoiceReprocessed.toLowerCase()) !== -1;
     }
     return myFilterPredicate;
   }
@@ -96,8 +91,28 @@ export class ReportComponent implements OnInit {
   {
     this.globalFilter='';
     this.raisedValue = '';
-    this.filteredValues['Inc_Raised'] = '';
-    this.filteredValues['Inc_Num'] = '';
+    this.reprocessedValue = '';
+    this.filteredValues['incidentRaised'] = '';
+    this.filteredValues['invoiceNum'] = '';
+    this.filteredValues['invoiceReprocessed'] = '';
     this.dataSource.filter = '';
+  }
+
+  loadData(): void{
+    this.showProgressbar = true;
+    this.reportService.getInvoiceDetails()
+    .subscribe(results => {
+      this.dataSource = new MatTableDataSource<InvoiceDetails>(results);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.dataSource.filterPredicate = this.customFilterPredicate();
+      this.showProgressbar = false;
+    });
+  }
+
+  refreshData(): void{
+    
+    this.dataSource = new MatTableDataSource();
+    this.loadData();
   }
 }
