@@ -6,6 +6,9 @@
     <mat-toolbar-row style="height: 45px;">
       <h3 class="header-txt">{{name}}</h3>
       <span class="example-spacer"></span>
+      <!-- <button title="Export to Excel" style="outline: none;border: none;border-radius: 4px;cursor: pointer;" >
+        Export to Excel
+      </button> -->
       <mat-icon title="Refresh Data" (click)="refreshData()" style="cursor:pointer;color: white;">refresh</mat-icon>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -38,9 +41,11 @@
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
+
   <mat-progress-bar *ngIf="showProgressbar" mode="indeterminate"></mat-progress-bar>
+
   <!-- Table for showing list of Invoices with Filtering , Paginator and Sorting -->
-  <mat-table #table [dataSource]="dataSource" matSort>
+  <mat-table  #table [dataSource]="dataSource" matSort style="height: 299px;">
 
     <ng-container matColumnDef="invoiceNum">
       <mat-header-cell *matHeaderCellDef> Invoice Number </mat-header-cell>
@@ -66,4 +71,5 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
 </div>

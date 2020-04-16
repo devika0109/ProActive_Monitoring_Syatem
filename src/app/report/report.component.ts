@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { InvoiceDetails } from '../models/invoicedetails';
 import { ReportService } from '../services/report.service';
 import { interval } from 'rxjs/observable/interval';
-
 
 @Component({
   selector: 'app-report',
@@ -17,7 +16,7 @@ export class ReportComponent implements OnInit {
 
   name:string='Report of Missing Invoices';
   showProgressbar:boolean = false;
-  private source = interval(60000);
+  private source = interval(3600000);
   raisedValue: string;
   reprocessedValue: string;
 
@@ -40,7 +39,6 @@ export class ReportComponent implements OnInit {
   constructor(private reportService:ReportService) {
     this.source.subscribe(() => {
       this.loadData();
-      console.log("Reloaded");
     });
   }
 
@@ -66,6 +64,7 @@ export class ReportComponent implements OnInit {
     this.dataSource.filter = JSON.stringify(this.filteredValues);
   }
 
+  //Filter Predicate Function
   customFilterPredicate() {
     const myFilterPredicate = (data: InvoiceDetails, filter: string): boolean => {
       var globalMatch = !this.globalFilter;
@@ -87,17 +86,6 @@ export class ReportComponent implements OnInit {
     return myFilterPredicate;
   }
 
-  resetFilters()
-  {
-    this.globalFilter='';
-    this.raisedValue = '';
-    this.reprocessedValue = '';
-    this.filteredValues['incidentRaised'] = '';
-    this.filteredValues['invoiceNum'] = '';
-    this.filteredValues['invoiceReprocessed'] = '';
-    this.dataSource.filter = '';
-  }
-
   loadData(): void{
     this.showProgressbar = true;
     this.reportService.getInvoiceDetails()
@@ -111,8 +99,19 @@ export class ReportComponent implements OnInit {
   }
 
   refreshData(): void{
-    
     this.dataSource = new MatTableDataSource();
     this.loadData();
   }
+
+  resetFilters()
+  {
+    this.globalFilter='';
+    this.raisedValue = '';
+    this.reprocessedValue = '';
+    this.filteredValues['incidentRaised'] = '';
+    this.filteredValues['invoiceNum'] = '';
+    this.filteredValues['invoiceReprocessed'] = '';
+    this.dataSource.filter = '';
+  }
+
 }

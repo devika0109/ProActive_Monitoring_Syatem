@@ -11,7 +11,9 @@
       <span class="_topnav" *ngIf="checklogin() != 'Login'">
         <button routerLink='Analysis'>Analysis</button>
 
-        <button routerLink='Report'>Report<span class="badge" *ngIf="badgeCount > 0">{{badgeCount}}</span></button>
+        <button routerLink='Report'>Report
+          <!-- <span class="badge" *ngIf="badgeCount > 0">{{badgeCount}}</span> -->
+        </button>
         <button routerLink='Queue'>Queue Status</button>
       </span>
       <span style="flex:1 1 auto"></span>
